@@ -10,6 +10,7 @@ const serverlessConfig: AWS = {
     lambdaHashingVersion: "20201221",
     region: "ap-northeast-1",
     stage: "production",
+    memorySize: 128,
   },
 
   functions: {
@@ -19,7 +20,10 @@ const serverlessConfig: AWS = {
         GET_SCRAPBOX_PAGES_ENDPOINT:
           "${ssm:/scrapbox-feeds/get-scrapbox-pages-endpoint~true}",
         SCRAPBOX_COOKIE: "${ssm:/scrapbox-feeds/scrapbox-cookie~true}",
+        SLACK_INCOMING_WEBHOOK:
+          "${ssm:/scrapbox-feeds/slack-incoming-webhook~true}",
       },
+      events: [{ schedule: "cron(58 23 * * ? *)" }],
     },
   },
 };
