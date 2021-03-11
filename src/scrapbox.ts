@@ -1,5 +1,6 @@
 import dayjs, { Dayjs } from "dayjs";
 import fetch, { Headers, RequestInit } from "node-fetch";
+import { ApplicationConfig } from "./types/ApplicationConfig";
 import { Page, ScrapboxPagesApiResponse } from "./types/scrapboxApiResponse";
 
 export const filterUpdatedPages = (args: {
@@ -24,13 +25,14 @@ export const filterUpdatedPages = (args: {
     });
 };
 
-export const fetchPages = async (): Promise<Page[]> => {
-  //TODO: config["key"] is assumed "unknown"
-  const url = process.env["GET_SCRAPBOX_PAGES_ENDPOINT"] as string; //config["scrapboxApiEndpoint"] as string;
+export const fetchPages = async (
+  config: ApplicationConfig
+): Promise<Page[]> => {
+  const url = config.GET_SCRAPBOX_PAGES_ENDPOINT;
   const requestOptions: RequestInit = {
     method: "GET",
     headers: new Headers({
-      Cookie: process.env["SCRAPBOX_COOKIE"] as string,
+      Cookie: config.SCRAPBOX_COOKIE,
     }),
     redirect: "follow",
   };
