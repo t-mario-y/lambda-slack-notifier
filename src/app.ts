@@ -12,23 +12,20 @@ export const handler: Handler = async () => {
 
   dayjs.locale(ja);
 
-  const scrapboxPages = await fetchPages();
+  const scrapboxPages = await fetchPages(config);
   const updatedPages = filterUpdatedPages({
     pages: scrapboxPages,
     date: dayjs(),
   });
 
-  const postResult = await postToSlack(updatedPages);
+  const postResult = await postToSlack({ config, pages: updatedPages });
   console.log(postResult);
 
   return {
     statusCode: 200,
     body: JSON.stringify(
       {
-        message: `Hello, world! Your function executed successfully!
-        GET_SCRAPBOX_PAGES_ENDPOINT:${config["scrapboxApiEndpoint"]},
-        SCRAPBOX_COOKIE:${config["scrapboxCookie"]},
-        SLACK_INCOMING_WEBHOOK:${config["slackIncomingWebhookUrl"]}`,
+        message: `Hello, world! Your function executed successfully!`,
       },
       null,
       2

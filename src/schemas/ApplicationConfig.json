@@ -1,0 +1,14 @@
+{
+  "title": "ApplicationConfig",
+  "type": "object",
+  "required": [
+    "GET_SCRAPBOX_PAGES_ENDPOINT",
+    "SCRAPBOX_COOKIE",
+    "SLACK_INCOMING_WEBHOOK"
+  ],
+  "properties": {
+    "GET_SCRAPBOX_PAGES_ENDPOINT": { "type": "string" },
+    "SCRAPBOX_COOKIE": { "type": "string" },
+    "SLACK_INCOMING_WEBHOOK": { "type": "string" }
+  }
+}
